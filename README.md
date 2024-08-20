@@ -1,3 +1,6 @@
+# Update
+Unfortunately it seems this is no longer working, my apolocheese
+
 # bonkler-scrapyard
 A recreation of the bonkler creator frontend. Accesible at: https://aleistercodely.github.io/bonkler-scrapyard/
 
