@@ -83,7 +83,7 @@ img.bonkler {
 	min-height: 0;
 	height: auto;
 	margin: 0 auto;
-	padding: 12px 12px 32px;
+	padding: 12px;
 	box-sizing: border-box;
 	background-color: var(--grey0);
 	box-shadow:
@@ -300,9 +300,8 @@ img.bonkler {
 
 	#creator-container {
 		max-width: var(--gallery-creator-width-desktop);
-		padding: 12px 14px 72px;
+		padding: 12px;
 		align-items: stretch;
-		gap: 64px;
 	}
 
 	#creator-inner-container {

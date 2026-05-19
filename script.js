@@ -1,5 +1,6 @@
 const data = {
 	BG: [
+		{ key: "00", value: "None" },
 		{ key: "33", value: "Akiko Yano Tadaima" },
 		{ key: "34", value: "Analord 11" },
 		{ key: "35", value: "Aquarium" },
@@ -64,6 +65,7 @@ const data = {
 		{ key: "21", value: "White Trim" },
 	],
 	Body: [
+		{ key: "00", value: "None" },
 		{ key: "35", value: "$2 Phone" },
 		{ key: "32", value: "#BASEDRETARDGANG Vol. 1" },
 		{ key: "31", value: "Another Freaking Mech" },
@@ -101,6 +103,7 @@ const data = {
 		{ key: "30", value: "YMO Tour" },
 	],
 	Head: [
+		{ key: "00", value: "None" },
 		{ key: "45", value: "Blender Sphere" },
 		{ key: "41", value: "Arcade Stick" },
 		{ key: "46", value: "Asus W5Fe" },
@@ -148,6 +151,7 @@ const data = {
 		{ key: "40", value: "YMO" },
 	],
 	Face: [
+		{ key: "00", value: "None" },
 		{ key: "36", value: "'o'" },
 		{ key: "37", value: "'~'" },
 		{ key: "45", value: ":D" },
@@ -226,6 +230,7 @@ const data = {
 		{ key: "33", value: "Winged Staff Gold" },
 	],
 	Offhand: [
+		{ key: "00", value: "None" },
 		{ key: "40", value: "48 Laws of Power" },
 		{ key: "36", value: "5 Yen" },
 		{ key: "49", value: "Adventures of Cookie & Cream" },
@@ -268,6 +273,7 @@ const data = {
 		{ key: "35", value: "xclock" },
 	],
 	Pilot: [
+		{ key: "00", value: "None" },
 		{ key: "33", value: "Alien Milady" },
 		{ key: "34", value: "Beauty:Beast Bunny" },
 		{ key: "35", value: "Binky" },
@@ -335,12 +341,13 @@ const assetNameAliases = {
 	"Beauty:Beast CD": "BeautyBeast Cd",
 	"Media Tab 04.29.22": "Media Tab",
 	Mysterious: null,
+	None: null,
 	"Sprite Signature?": "Sprite Signature",
 	":D": "D",
 	">-<": "_-_",
 	">_<": "___",
 	"?.?": "^_3",
-	Kaomoji: "^•^",
+	Kaomoji: "Ω",
 	"^�^": "^•^",
 	"~.~": "~",
 	"�?�": "ø∫ø",
