@@ -1,36 +1,15 @@
 :root {
-	/* colors */
-	--grey0: #e5e5e5; /* bg */
-	--grey1: #bdbdbc; /* scroll bar */
-	--grey2: #a8a9a9; /* header */
-	--grey3: #5e5e5e; /* grey texts */
-	--blue: #80a9ce;
-	--bg-green: #9cbab9;
-	--bg-purple: #73628a;
-	--bg-yellow: #f5cb5c;
-	--pink: #d8b2b6;
-	--red: #b05659;
-	--brown: #6f555a;
+	--grey0: #e5e5e5;
+	--grey1: #bdbdbc;
+	--grey3: #5e5e5e;
 	--border-shadow: #444444;
-	--border-highlight: #f1f1f1;
+	--border-highlight: #444444;
 
-	--x-small: 14px;
-	--small: 16px;
-	--medium: 18px;
-	--large: 25px;
+	--medium: 16px;
+	--scroll-bar-width-desktop: 18px;
 
-	--x-small-mobile: 11px;
-	--small-mobile: 15px;
-	--medium-mobile: 16px;
-	--large-mobile: 23px;
-
-	--bar-height-desktop: 41px;
-	--input-height: 36px;
-	--scroll-bar-width-desktop: 21px;
-	--scroll-bar-width-mobile: 20px;
-
-	--gallery-creator-width-desktop: 843px;
-	--gallery-creator-width-mobile: 396px;
+	--gallery-creator-width-desktop: 1320px;
+	--gallery-creator-width-mobile: 360px;
 
 	user-select: none;
 }
@@ -43,6 +22,19 @@ input {
 	background-color: #b3b09c;
 }
 
+select {
+	font-family: inherit;
+	font-style: inherit;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+}
+
 button {
 	background: none;
 	border: none;
@@ -53,14 +45,10 @@ button {
 	color: var(--grey3);
 	font-style: normal;
 }
-.text-grey-normal-underline {
-	color: var(--grey3);
-	font-style: normal;
-	text-decoration: underline;
-}
 
 input {
 	border: none;
+	appearance: textfield;
 	-moz-appearance: textfield;
 }
 input:focus {
@@ -73,882 +61,310 @@ input::-webkit-outer-spin-button {
 	margin: 0 !important;
 }
 
-a {
-	text-decoration: none;
-}
-
 img.bonkler {
 	image-rendering: pixelated;
 	max-width: 100%;
 }
 
-/* for downloading bonkler img in creator. not added to the DOM */
-/* canvas 
-{ 
-    position: absolute; left: 0; top: 0;
-    image-rendering: pixelated;
-} */
-
-/*
-#main-container
-{
-    position: absolute; width: 100vw; height: 100vh; margin: 0; left: 0; right: 0; top: 0; bottom: 0;
-}
-*/
-
-/* test buttons */
-#test {
-	position: absolute;
-	right: 0;
-	z-index: 444;
-	width: 160px;
-	display: flex;
-	flex-direction: column;
-	background-color: rgba(255, 255, 255, 0.8);
-}
-#test button {
-	font-size: 16px !important;
-	white-space: nowrap;
-	margin: 3%;
-}
-
-/* desktop / landscape */
-@media (min-aspect-ratio: 5/4) {
-	/* desktop font sizes */
-	#nav-content button,
-	.title-bar,
-	#date-time,
-	#current-bid-container,
-	#countdown-container {
-		font-size: var(--large);
-	}
-
-	#address-bar-content,
-	.wallet,
-	.treasury,
-	#bid-input,
-	.gallery-creator-top-bar,
-	#creator-bonkler-name,
-	.trait-selector-textbox {
-		font-size: var(--small);
-	}
-
-	.text-grey-normal,
-	.text-grey-normal-underline,
-	#prev-bids-container,
-	#home-view p {
-		font-size: var(--small);
-	}
-
-	.bonkler-info,
-	.info-content button {
-		font-size: var(--x-small);
-	}
-
-	/* prev, next, increment, decrement, confirm buttons */
-	.sqr {
-		width: 36px;
-		height: 36px;
-	}
-
-	/* wallet connect & treasury display */
-	.rect-large {
-		width: 125px;
-		height: 36px;
-	}
-
-	/* burn */
-	.rect-small {
-		width: 37px;
-		height: 20px;
-	}
-
-	#nav {
-		width: 160px;
-		height: 180px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Nav_Colored/nav_header.svg")
-			no-repeat;
-		position: absolute;
-		left: 7%;
-		top: 5%;
-	}
-	#nav-content {
-		grid-template-rows: 3;
-	}
-
-	#nav-content button {
-		width: 160px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Nav_Colored/nav_default.svg")
-			no-repeat;
-	}
-	#nav-content button:hover {
-		width: 160px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Nav_Colored/nav_hover.svg")
-			no-repeat;
-	}
-	.nav-btn-active {
-		width: 160px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Nav_Colored/nav_active.svg")
-			no-repeat !important;
-	}
-
-	#main-window {
-		width: 912px;
-		height: 912px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/main_window_plain.svg")
-			no-repeat;
-		position: absolute;
-		left: 25%;
-		top: 5%;
-	}
-
-	.view {
-		margin: 3%;
-		margin-right: 8px;
-		margin-top: 4%; /* align scroll bar with bg */
-		top: calc(var(--bar-height-desktop) * 2);
-	}
-
-	#bg-color-fill {
-		width: 874px;
-		height: 808px;
-		top: 97px;
-		left: 7px;
-	}
-
-	#address-bar-container {
-		display: flex;
-		flex-direction: row;
-	}
-
-	.view::-webkit-scrollbar,
-	#prev-bids-inner::-webkit-scrollbar {
-		width: var(--scroll-bar-width-desktop);
-	}
-
-	/********** home (desktop) **********/
-
-	#bonkler-frame-home {
-		width: 420px;
-		height: 549px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Home/nft_border.svg")
-			no-repeat;
-	}
-
-	#auction-bid-container {
-		width: 412px;
-		height: 267px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Home/auction_bid_table_no_input.svg")
-			no-repeat;
-	}
-
-	#prev-bids-container {
-		width: 411px;
-		height: 268px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Home/previous_bids_table_noheader.svg")
-			no-repeat;
-	}
-
-	#home-view-inner-container {
-		grid-row: 2;
-		grid-column: 2;
-		gap: 1%;
-	}
-
-	/* bonkler frame, img, traits share the same grid position */
-	#bonkler-frame-home {
-		grid-column: 1;
-		grid-row: 1/3;
-	}
-	#current-bonkler {
-		grid-column: 1;
-		grid-row: 1/3;
-		width: 420px;
-		height: 549px;
-	}
-	#bonkler-traits {
-		grid-column: 1;
-		grid-row: 1/3;
-		/* width: 420px; height: 549px;  */
-		width: 380px;
-		height: 509px;
-		padding: 20px;
-	}
-	#auction-bid-container {
-		grid-column: 2;
-		grid-row: 1;
-	}
-
-	#prev-bids-container {
-		grid-column: 2;
-		grid-row: 2;
-	}
-
-	#current-bid-container,
-	#countdown-container {
-		margin: 3%;
-	}
-
-	#auction-small-texts {
-		height: 115px;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-	}
-	#auction-small-texts p {
-		margin: auto !important;
-	}
-
-	.table-wallet {
-		width: 215px;
-	}
-	.table-amount {
-		width: 76px;
-	}
-	.table-txn {
-		width: 80px;
-	}
-
-	#home-view p {
-		margin-left: 1%;
-		margin-right: 1%;
-	}
-	/********** home (desktop) end **********/
-
-	/********** gallery (desktop) **********/
-
-	.gallery {
-		width: var(--gallery-creator-width-desktop);
-		height: 374;
-	}
-
-	.gallery-creator-top-bar {
-		width: 823px;
-		height: 36px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Gallery/gallery_search_bar.svg")
-			no-repeat;
-	}
-	#creator-bonkler-name {
-		width: 813px;
-		height: 36px;
-	}
-
-	.bonkler-frame-gallery {
-		width: 151px;
-		height: 197px;
-	}
-	.bonkler-gallery {
-		width: 143px;
-		height: auto;
-	}
-	.bonkler-info {
-		width: 151px;
-		height: 75px;
-	}
-
-	.bonklers-container {
-		width: 811px;
-		height: 309px;
-		padding-left: 6px;
-		padding-right: 6px;
-		grid-template-columns: repeat(5, 1fr);
-	}
-
-	/********** gallery (desktop) end **********/
-
-	/********** creator (desktop) **********/
-
-	#trait-selector-desktop {
-		display: block;
-	}
-	#trait-selector-mobile {
-		display: none;
-	}
-
-	#creator-container {
-		width: var(--gallery-creator-width-desktop);
-		height: 865px;
-		margin: 0 auto;
-		/* background: url("https://bonkler.remilia.org/Assets/Desktop/Creator/creator_bg.svg") no-repeat; */
-	}
-
-	#creator-inner-container {
-		width: var(--gallery-creator-width-desktop);
-		height: 800px;
-	}
-	#creator-wrapper {
-		grid-template-columns: 2;
-		gap: 20px;
-	}
-	#bonkler-frame-creator {
-		grid-column: 1;
-		width: 528px;
-		height: 704px;
-	}
-	#Bonkler {
-		grid-column: 1;
-		width: 528px;
-		height: auto;
-	}
-
-	#trait-selector-container {
-		width: 274px;
-		height: 760px;
-		grid-column: 2;
-		gap: 14px;
-		/* background: url("https://bonkler.remilia.org/Assets/Desktop/Creator/trait_selector_border.svg") no-repeat; */
-		justify-content: center;
-		align-items: center;
-	}
-	#trait-texts,
-	#trait-btns {
-		width: 85%;
-	}
-
-	.trait-wrapper {
-		width: 274px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		border-top: solid 2px var(--grey3);
-		height: 55px;
-	}
-	.trait-wrapper:last-child {
-		border-bottom: solid 2px var(--grey3);
-	}
-
-	.trait-name {
-		font-weight: bold;
-		font-size: var(--medium);
-		align-self: flex-start;
-		margin-left: 24px;
-	}
-	.trait-selector-textbox {
-		width: 157px;
-		height: 35px;
-		background: url("https://bonkler.remilia.org/Assets/Desktop/Creator/trait_selector_textbox.svg")
-			no-repeat;
-		font-weight: bold;
-	}
-
-	select,
-	input {
-		min-width: 95%;
-		max-width: 95%;
-	}
-	/********** creator (desktop) end **********/
-}
-
-/********** components bg & size end **********/
-.prev {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/back_arrow_inactive.svg")
-		no-repeat;
-}
-.next {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/forward_arrow_inactive.svg")
-		no-repeat;
-}
-
-.prev:active {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/back_arrow_active.svg")
-		no-repeat;
-}
-.next:active {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/forward_arrow_active.svg")
-		no-repeat;
-}
-
-.increment {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Home/increase_bid_inactive.svg")
-		no-repeat;
-}
-.decrement {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Home/decrease_bid_inactive.svg")
-		no-repeat;
-}
-.confirm {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Home/checkmark_inactive.svg")
-		no-repeat;
-}
-
-.confirm:active {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Home/checkmark_active.svg")
-		no-repeat;
-}
-
-.wallet {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/blue_wallet_connect.svg")
-		no-repeat;
-}
-.treasury {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/pink_treasury.svg")
-		no-repeat;
-}
-
-.address-bar-content-long /* no prev / next btns */ {
-	width: 634px;
-	background: url("https://bonkler.remilia.org/Assets/Desktop/white_msg_bar_long.svg")
-		no-repeat;
-	margin-left: 0 !important;
-	/* background-color: white;
-    box-shadow: inset 2px 2px 2px var(--border-shadow), inset -2px -2px 2px var(--grey0);  */
-}
-
-.address-bar-content-short /* with prev / next btns */ {
-	width: 550px;
-	background: url("https://bonkler.remilia.org/Assets/Desktop/white_msg_bar.svg")
-		no-repeat;
-}
-
-/********** components bg & size end **********/
-
-#nav-content {
-	position: absolute;
-	top: var(--bar-height-desktop);
-	bottom: 0;
-	display: grid;
-}
-#nav-content button {
-	padding: 0;
-	padding-left: 10%;
-	text-align: left;
-}
-
-.view {
-	left: 0;
-	right: 0;
-	bottom: 0;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	z-index: 10;
-}
-
-#bg-color-fill {
-	position: absolute;
-}
-
-.view::-webkit-scrollbar,
-#prev-bids-inner::-webkit-scrollbar {
-	background-color: transparent;
-}
-
-.view::-webkit-scrollbar-thumb,
-#prev-bids-inner::-webkit-scrollbar-thumb {
-	color: var(--grey2);
-	box-shadow: inset 2px 2px 1px var(--border-highlight),
-		inset -2px -2px 1px var(--border-shadow);
-}
-
-.title-bar /* for both nav and main window*/ {
-	position: absolute;
-	top: 0;
-	left: 2px;
-	width: 100%;
-	height: var(--bar-height-desktop);
-	font-weight: bold;
-	margin-left: 17px;
-	display: flex;
-	align-items: center;
-}
-
-#date-time {
-	font-weight: normal !important;
-	position: absolute;
-	right: 76px;
-	width: 200px;
-	white-space: nowrap;
-	text-align: center;
-}
-
-#address-bar-container {
-	position: absolute;
-	top: var(--bar-height-desktop);
-	left: 0;
-	right: 0;
-	margin: 1%;
-}
-
-#address-bar-content {
-	margin-left: 1%;
-	padding-left: 1%;
-	height: var(--input-height);
-	line-height: var(--input-height);
-	overflow-y: scroll;
-	/* hide scroll bar */
-	-ms-overflow-style: none;
-	scrollbar-width: none;
-}
-#address-bar-content::-webkit-scrollbar {
-	background-color: transparent;
-}
-
-#wallet-treasury-container {
-	margin-left: 1%;
-	position: absolute;
-	right: 0;
-	display: flex;
-	flex-direction: row;
-	gap: 2%;
-}
-
-.wallet,
-.treasury {
-	color: white;
-	font-weight: bold;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-/****************** home view ******************/
-
-#home-view-inner-container {
-	display: grid;
-}
-
-#bonkler-frame-home {
-	z-index: 20;
-	pointer-events: none;
-}
-
-#current-bonkler {
-	position: absolute;
-	margin: auto;
-}
-
-#bonkler-traits {
-	position: absolute;
-	z-index: 11;
-	background-color: rgba(255, 255, 255, 0.8);
-	/* display: grid;  */
-	display: none;
-	grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-	justify-items: center;
-	align-items: center;
-}
-
-.single-trait-container {
-	width: 110px;
-	height: 150px;
-	box-shadow: inset 2px 2px 3px var(--border-shadow),
-		inset -2px -2px 3px var(--border-shadow);
-}
-
-.single-trait-container p {
-	text-align: center;
-}
-
-#auction-bid-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-}
-
-#auction-big-texts,
-#auction-small-texts,
-#mint-btns-container {
-	margin-left: 2%;
-	margin-right: 2%;
-}
-#mint-btns-container {
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-}
-
-#countdown-container {
-	margin-bottom: 0 !important;
-}
-
-#cur-bid,
-#countdown {
-	float: right;
-}
-
-#auction-small-texts {
-	display: grid;
-	cursor: pointer;
-}
-
-#traits-toggle-wrapper {
-	display: flex;
-	align-items: center;
-}
-#toggle-traits {
-	vertical-align: text-top;
-}
-#auction-small-texts p,
-#auction-small-texts button {
-	text-align: left;
-	margin: 0;
-	margin-left: 3%;
-	padding: 0;
-}
-#bid-input {
-	/* margin-left: 3%; margin-right: 3%;  */
-	vertical-align: top;
-	background: none;
-	font-style: normal;
-	width: 190px;
-	height: calc(var(--input-height) * 0.9);
-	padding-left: 7px;
-	/* temp */
-	background-color: white;
-	box-shadow: inset 2px 2px 2px var(--border-shadow),
-		inset -2px -2px 1px var(--border-highlight);
-}
-
-#prev-bids-inner {
-	width: 100%;
-	height: 97%;
-	overflow-y: scroll;
-	overflow-x: hidden;
-}
-#prev-bids-table {
-	text-indent: 3px;
-}
-#prev-bids-container th {
-	background-color: var(--grey3);
-	color: var(--grey0);
-	font-weight: normal;
-	font-style: normal;
-	text-align: left;
-}
-#bids-header {
-	position: absolute;
-}
-#prev-bids-container tbody tr {
-	display: table-header-group;
-} /* align body w header */
-td.table-amount {
-	text-align: right !important;
-}
-.table-txn {
-	text-align: right !important;
-}
-.table-txn img {
-	display: inline;
-	height: 15px;
-	width: auto;
-}
-tr:nth-child(even) {
-	background-color: var(--grey1);
-}
-
-#description-home {
-	user-select: text !important;
-	font-style: normal;
-}
-#description-home p /* quotes */ {
-	font-style: italic;
-	margin: 0;
-	text-align: center;
-}
-
-/****************** home view end ******************/
-
-/****************** gallery view ******************/
-
-#gallery-view {
-	display: none;
-} /* initially hidden */
-
-/* gallery & creator share the same layout, */
-/* with search bar + inner container */
-.gallery,
 #creator-container {
+	width: 100%;
+	max-width: var(--gallery-creator-width-mobile);
+	min-height: 0;
+	height: auto;
+	margin: 0 auto;
+	padding: 12px 12px 32px;
+	box-sizing: border-box;
 	background-color: var(--grey0);
-	box-shadow: inset 2px 2px 2px var(--border-shadow),
+	box-shadow:
+		inset 2px 2px 2px var(--border-shadow),
 		inset -2px -2px 1px var(--border-highlight);
-	/* background: url("https://bonkler.remilia.org/Assets/Desktop/Gallery/gallery_inner_window.svg") no-repeat; */
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	gap: 10px;
-}
-
-#gallery-view-inner-container {
-	display: grid;
-	grid-row: 2;
-	row-gap: 20px;
 }
 
 .gallery-creator-top-bar {
+	width: 100%;
+	height: 46px;
+	padding: 4px;
+	box-sizing: border-box;
+	background: var(--grey0);
+	box-shadow:
+		inset 3px 3px 4px var(--border-shadow),
+		inset -3px -3px 3px var(--border-highlight);
 	display: flex;
 	align-items: center;
 }
 
-.bonklers-container {
-	display: grid;
-	justify-items: center;
-	align-items: center;
-	box-shadow: inset 2px 2px 3px var(--border-shadow),
-		inset -2px -2px 3px var(--border-shadow);
+#creator-scroll {
+	box-sizing: border-box;
+	width: 100vw;
+	height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
-.bonkler-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 10px;
-}
-
-.bonkler-frame-gallery {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Gallery/gallery_nft_border.svg")
-		no-repeat;
+#creator-stage {
+	box-sizing: border-box;
+	min-height: 100%;
+	padding: 8px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.bonkler-info {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Gallery/gallery_nft_description.svg")
-		no-repeat;
-	display: grid;
-	grid-row: 2;
-	grid-column: 2;
-	white-space: nowrap;
-}
-
-.info-content {
-	margin: 0;
-	width: 90%;
-	margin-left: 5%;
-	margin-right: 5%;
-	align-self: center;
-}
-
-/* .info-content { grid-row: 1/3; grid-column: 1; margin: 0;}
-.info-date { grid-row: 1; grid-column: 2; margin: 0; }
-.bonkler-info button { grid-row: 2; grid-column: 2; } */
-/****************** gallery view end ******************/
-
-/****************** creator view ******************/
-
 #creator-view {
-	display: none;
-} /* initially hidden */
+	position: static;
+	overflow: visible;
+}
 
 #creator-inner-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 	max-width: 100%;
 }
 #creator-wrapper {
-	display: grid;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 16px;
 	max-width: 100%;
 }
-/* frame and img occupy the same grid */
-#bonkler-frame-creator {
-	pointer-events: none;
-	z-index: 1;
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Creator/nft_border.svg")
-		no-repeat;
-	/* todo use different asset for mobile (thicc frame) */
-}
-#creator-img {
-	position: absolute;
+#creator-bonkler-name {
+	width: 100%;
+	height: 38px;
+	padding: 0 10px;
+	box-sizing: border-box;
+	font-size: 20px;
+	line-height: 38px;
+	background: #f7f7f7;
+	box-shadow: inset 1px 1px 4px #d1d1d1;
+	margin: 0;
 }
 
-#creator-bonkler-name {
-	background: none;
-	margin-left: 7px;
+#Bonkler,
+#trait-selector-container {
+	width: min(360px, 100%);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#Bonkler {
+	max-width: 720px;
+	height: auto;
+	min-width: 0;
 }
 
 #trait-selector-container {
 	height: auto;
-	box-shadow: inset 2px 2px 3px var(--border-shadow),
-		inset -2px -2px 3px var(--border-shadow);
+	background-color: var(--grey0);
+	box-shadow:
+		inset 3px 3px 5px var(--border-shadow),
+		inset -3px -3px 4px var(--border-highlight);
 	display: flex;
 	flex-direction: column;
 }
 
-.trait-selector-textbox {
+#trait-texts,
+#trait-btns,
+#trait-selector-desktop {
+	width: 100%;
+}
+
+.trait-wrapper {
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 	justify-content: center;
-	font-weight: normal;
+	border-top: solid 2px var(--grey3);
+	min-height: 58px;
+	height: auto;
+	padding: 6px 14px 7px 16px;
+}
+
+.trait-wrapper:last-child {
+	border-bottom: solid 2px var(--grey3);
+}
+
+#trait-selector-container select,
+#trait-selector-container input {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	height: 32px;
+	font-size: 16px;
+}
+
+#trait-texts {
+	box-sizing: border-box;
+	min-height: 56px;
+	padding: 18px 16px 10px;
+	border-bottom: solid 3px var(--grey3);
+	display: flex;
+	align-items: flex-start;
+}
+
+#trait-texts .text-grey-normal {
+	font-size: 18px;
+	color: var(--grey3);
 }
 
 #trait-selector-container p {
-	margin: 0;
-	padding-left: 7%;
+	margin: 0 0 1px 0;
+	padding-left: 8px;
 	margin-right: auto;
-}
-
-.trait-selector /* desktop only*/ {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 2%;
-	margin-top: 4%;
-	margin-bottom: 4%;
+	font-size: 16px;
+	line-height: 1.08;
 }
 
 #trait-btns {
 	max-width: 100%;
 	display: grid;
-	grid-template-columns: 2;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-auto-rows: 38px;
+	gap: 12px 10px;
+	padding: 12px 12px 16px 16px;
+	box-sizing: border-box;
 }
 
 #SaveBonkler {
 	grid-column: 2;
-	font-weight: bold !important;
-	font-size: var(--medium) !important;
+	font-weight: bold;
+	font-size: var(--medium);
 }
 
 #RandomBonkler {
 	grid-column: 1;
-	font-weight: bold !important;
-	font-size: var(--medium) !important;
+	font-weight: bold;
+	font-size: var(--medium);
 }
 
 #ShareBonkler {
-	margin-top: 20px;
 	grid-column: 1;
-	font-weight: bold !important;
-	font-size: var(--medium) !important;
+	font-weight: bold;
+	font-size: var(--medium);
 }
 
 #RandomBonkler,
 #SaveBonkler,
 #ShareBonkler {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Creator/random_btn_inactive.svg")
-		no-repeat;
+	width: 100%;
+	height: 38px;
+	padding: 0;
+	background-color: #f7f7f7;
+	border: 1px solid #111;
+	box-shadow:
+		inset 2px 2px 2px var(--border-highlight),
+		inset -2px -2px 2px var(--border-shadow);
+	color: #000;
+	font-style: italic;
+	font-size: 16px;
+	line-height: 1;
 }
 #RandomBonkler:active,
 #SaveBonkler:active,
 #ShareBonkler:active {
-	background: url("https://bonkler.remilia.org/Assets/Desktop/Creator/random_btn_active.svg")
-		no-repeat;
+	box-shadow:
+		inset 2px 2px 2px var(--border-shadow),
+		inset -2px -2px 2px var(--border-highlight);
+	transform: translate(1px, 1px);
 }
 
-@media (max-aspect-ratio: 5/4) {
-	#creator-bonkler-name {
-		width: 95vw;
+@media (min-width: 1101px) {
+	.rect-large {
+		width: 125px;
 		height: 36px;
-		margin: auto 0px;
 	}
-	#trait-selector-container {
+
+	.gallery-creator-top-bar {
+		height: 54px;
 		padding: 5px;
 	}
-	#trait-selector-container p {
-		padding-left: 1%;
+
+	#creator-bonkler-name {
+		height: 44px;
+		font-size: 24px;
+		line-height: 44px;
 	}
-	select,
-	input {
-		height: 36px;
-		min-width: 90vw;
-		max-width: 90vw;
-		margin: 0 -1px;
+
+	#creator-container {
+		max-width: var(--gallery-creator-width-desktop);
+		padding: 12px 14px 72px;
+		align-items: stretch;
+		gap: 64px;
 	}
-	#SaveBonkler,
-	#RandomBonkler,
-	#ShareBonkler {
-		margin-top: 15px;
-		height: 52px;
-		max-width: 152px;
+
+	#creator-inner-container {
+		align-items: flex-start;
 	}
+
+	#creator-wrapper {
+		flex-direction: row;
+		gap: 24px;
+		justify-content: space-between;
+		min-width: 0;
+	}
+
+	#Bonkler {
+		flex: 1 1 820px;
+		width: auto;
+		max-width: 820px;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	#trait-selector-container {
+		width: 360px;
+	}
+
+	#trait-selector-container select,
+	#trait-selector-container input {
+		height: 26px;
+	}
+}
+
+#creator-scroll {
+	scrollbar-gutter: stable;
+}
+
+#creator-scroll::-webkit-scrollbar {
+	width: var(--scroll-bar-width-desktop);
+	height: var(--scroll-bar-width-desktop);
+	background-color: transparent;
+}
+
+#creator-scroll::-webkit-scrollbar-track {
+	background-color: var(--grey0);
+	box-shadow:
+		inset 2px 2px 2px var(--border-shadow),
+		inset -2px -2px 1px var(--border-highlight);
+}
+
+#creator-scroll::-webkit-scrollbar-thumb {
+	min-height: 36px;
+	color: var(--grey1);
+	background-color: var(--grey1);
+	border: 1px solid var(--border-shadow);
+	box-shadow:
+		inset 2px 2px 1px var(--border-highlight),
+		inset -2px -2px 1px var(--border-shadow);
+}
+
+#creator-scroll::-webkit-scrollbar-button {
+	width: var(--scroll-bar-width-desktop);
+	height: var(--scroll-bar-width-desktop);
+	background-color: var(--grey1);
+	border: 1px solid var(--border-shadow);
+	box-shadow:
+		inset 2px 2px 1px var(--border-highlight),
+		inset -2px -2px 1px var(--border-shadow);
+}
+
+#creator-scroll::-webkit-scrollbar-corner {
+	background-color: var(--grey0);
 }

@@ -9,93 +9,90 @@
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	</head>
 	<body>
-		<div class="view" id="creator-view" style="display: block">
-			<div id="creator-container">
-				<div class="gallery-creator-top-bar">
-					<input
-						type="text"
-						id="creator-bonkler-name"
-						placeholder="Bonkler name?"
-					/>
-				</div>
-				<div id="creator-inner-container">
-					<div id="creator-wrapper">
-						<img
-							class="bonkler"
-							id="Bonkler"
-							src="https://bonklerimg.remilia.org/cgi-bin/bonklercgi?gen=0000000000000000&meta=no&factor=4"
-							alt="Descriptive Alt Text"
-						/>
-						<div id="trait-selector-container">
-							<div id="trait-texts">
-								<span
-									class="text-grey-normal"
-									style="float: left"
-									>Trait Selector</span
-								>
-								<!-- <span style="float: right;"> 
-                                    <a class="text-grey-normal-underline" id="save-bonkler" target="_blank" >Save</a>
-                                </span> -->
-							</div>
-							<!-- desktop -->
-							<div id="trait-selector-desktop">
-								<div class="trait-wrapper">
-									<p>Background:</p>
-									<select id="BG"></select>
+		<main id="creator-scroll">
+			<div id="creator-stage">
+				<div id="creator-view">
+					<div id="creator-container">
+						<div class="gallery-creator-top-bar">
+							<input
+								type="text"
+								id="creator-bonkler-name"
+								placeholder="Bonkler name?"
+							/>
+						</div>
+						<div id="creator-inner-container">
+							<div id="creator-wrapper">
+								<img
+									class="bonkler"
+									id="Bonkler"
+									src="assets/BG/Akiko%20Yano%20Tadaima.webp"
+									alt="Descriptive Alt Text"
+								/>
+								<div id="trait-selector-container">
+									<div id="trait-texts">
+										<span class="text-grey-normal">Trait Selector</span>
+									</div>
+									<!-- desktop -->
+									<div id="trait-selector-desktop">
+										<div class="trait-wrapper">
+											<p>Background:</p>
+											<select id="BG"></select>
+										</div>
+										<div class="trait-wrapper">
+											<p>Armor:</p>
+											<select id="Armor"></select>
+										</div>
+										<div class="trait-wrapper">
+											<p>Body:</p>
+											<select id="Body"></select>
+										</div>
+										<div class="trait-wrapper">
+											<p>Head:</p>
+											<select id="Head"></select>
+										</div>
+										<div class="trait-wrapper">
+											<p>Face:</p>
+											<select id="Face"></select>
+										</div>
+										<div class="trait-wrapper">
+											<p>Hand:</p>
+											<select id="Hand"></select>
+										</div>
+										<div class="trait-wrapper">
+											<p>Offhand:</p>
+											<select id="Offhand"></select>
+										</div>
+										<div class="trait-wrapper">
+											<p>Pilot:</p>
+											<select id="Pilot"></select>
+										</div>
+										<div class="trait-wrapper">
+											<p>Number:</p>
+											<input
+												type="number"
+												id="BonklerMoney"
+												placeholder="Number?"
+											/>
+										</div>
+									</div>
+									<!-- random & save btn -->
+									<div id="trait-btns">
+										<button class="rect-large" id="RandomBonkler">
+											Random
+										</button>
+										<button class="rect-large" id="SaveBonkler">
+											Save
+										</button>
+										<button class="rect-large" id="ShareBonkler">
+											Share
+										</button>
+									</div>
 								</div>
-								<div class="trait-wrapper">
-									<p>Armor:</p>
-									<select id="Armor"></select>
-								</div>
-								<div class="trait-wrapper">
-									<p>Body:</p>
-									<select id="Body"></select>
-								</div>
-								<div class="trait-wrapper">
-									<p>Head:</p>
-									<select id="Head"></select>
-								</div>
-								<div class="trait-wrapper">
-									<p>Face:</p>
-									<select id="Face"></select>
-								</div>
-								<div class="trait-wrapper">
-									<p>Hand:</p>
-									<select id="Hand"></select>
-								</div>
-								<div class="trait-wrapper">
-									<p>Offhand:</p>
-									<select id="Offhand"></select>
-								</div>
-								<div class="trait-wrapper">
-									<p>Pilot:</p>
-									<select id="Pilot"></select>
-								</div>
-								<div class="trait-wrapper">
-									<p>Number:</p>
-									<input
-										type="number"
-										id="BonklerMoney"
-										placeholder="Number?"
-									/>
-								</div>
-							</div>
-							<!-- random & save btn -->
-							<div id="trait-btns">
-								<button class="rect-large" id="RandomBonkler">
-									Random
-								</button>
-								<button class="rect-large" id="SaveBonkler">
-									Save
-								</button>
-								<button class="rect-large" id="ShareBonkler">
-									Share
-								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</main>
 	</body>
 </html>

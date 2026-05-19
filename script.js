@@ -318,6 +318,85 @@ let templateState = {
 	Pilot: "33",
 };
 
+const renderScale = 4;
+const layerWidth = 150;
+const layerHeight = 200;
+let renderToken = 0;
+
+const assetNameAliases = {
+	"#BASEDRETARDGANG Vol. 1": "BRG Vol 1",
+	"Adventures of Cookie & Cream": "Adventures Of Cookie & Cream",
+	"Beauty:Beast Bunny": "BeautyBeast Bunny",
+	"Beauty:Beast CD": "BeautyBeast Cd",
+	"Media Tab 04.29.22": "Media Tab",
+	Mysterious: null,
+	"Sprite Signature?": "Sprite Signature",
+	":D": "D",
+	">-<": "_-_",
+	">_<": "___",
+	"?.?": "^_3",
+	Kaomoji: "^•^",
+	"^�^": "^•^",
+	"~.~": "~",
+	"�?�": "ø∫ø",
+};
+
+const categoryOptionsByKey = Object.fromEntries(
+	Object.entries(data).map(([category, options]) => [
+		category,
+		Object.fromEntries(options.map((option) => [option.key, option])),
+	])
+);
+
+function getAssetPath(category, key) {
+	const option = categoryOptionsByKey[category]?.[key];
+	if (!option) return null;
+
+	const assetName = Object.hasOwn(assetNameAliases, option.value)
+		? assetNameAliases[option.value]
+		: option.value;
+	if (!assetName) return null;
+
+	return `assets/${encodeURIComponent(category)}/${encodeURIComponent(
+		assetName
+	)}.webp`;
+}
+
+function loadImage(src) {
+	return new Promise((resolve, reject) => {
+		const img = new Image();
+		img.onload = () => resolve(img);
+		img.onerror = () => reject(new Error(`Unable to load ${src}`));
+		img.src = src;
+	});
+}
+
+async function renderBonklerImage() {
+	const currentRenderToken = ++renderToken;
+	const canvas = document.createElement("canvas");
+	const ctx = canvas.getContext("2d");
+	const layers = Object.entries(templateState)
+		.map(([category, key]) => getAssetPath(category, key))
+		.filter(Boolean);
+
+	canvas.width = layerWidth * renderScale;
+	canvas.height = layerHeight * renderScale;
+	ctx.imageSmoothingEnabled = false;
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	for (const layer of layers) {
+		try {
+			const img = await loadImage(layer);
+			if (currentRenderToken !== renderToken) return null;
+			ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+		} catch (error) {
+			console.warn(error);
+		}
+	}
+
+	return canvas.toDataURL("image/png");
+}
+
 // History stuff
 let fromURL = false;
 let userIsCooking = false;
@@ -427,16 +506,12 @@ function handleSelection(category, key, trigger) {
 	trigger && buildBonkler();
 }
 
-function buildBonkler(saveState) {
+async function buildBonkler(saveState) {
 	const template = Object.values(templateState).join("");
-	let imageUrl = `https://bonklerimg.remilia.org/cgi-bin/bonklercgi?gen=${template}&meta=no&factor=4`;
-
-	// Check if money exists and is not 0, then append it to the URL
-	if (money && money !== 0) {
-		imageUrl += `&reserve=${money}`;
-	}
+	const imageUrl = await renderBonklerImage();
 
 	// Update the Bonkler image source
+	if (!imageUrl) return;
 	document.getElementById("Bonkler").src = imageUrl;
 
 	// Update the browser URL without reloading the page and construct a new URL with the template and, optionally, the money parameter
