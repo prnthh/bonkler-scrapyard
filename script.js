@@ -43,7 +43,8 @@ const data = {
 		{ key: "27", value: "Bronze Trim" },
 		{
 			key: "29",
-			value: "Comme Des Garcons Homme Plus FW18 Dover Street Market Installation Dinosaur Bones",
+			value:
+				"Comme Des Garcons Homme Plus FW18 Dover Street Market Installation Dinosaur Bones",
 		},
 		{ key: "30", value: "Dragon" },
 		{ key: "31", value: "Glory" },
@@ -307,7 +308,8 @@ const gwei = 1e18;
 let money = null;
 
 let bonklerName = "";
-let templateState = {
+let bonklerNumber = "";
+const templateState = {
 	BG: "33",
 	Armor: "23",
 	Body: "35",
@@ -322,6 +324,9 @@ const renderScale = 4;
 const layerWidth = 150;
 const layerHeight = 200;
 let renderToken = 0;
+const numberFontFamily = "BonklerDOS";
+const numberFontSize = 36;
+let numberFontReadyPromise;
 
 const assetNameAliases = {
 	"#BASEDRETARDGANG Vol. 1": "BRG Vol 1",
@@ -345,7 +350,7 @@ const categoryOptionsByKey = Object.fromEntries(
 	Object.entries(data).map(([category, options]) => [
 		category,
 		Object.fromEntries(options.map((option) => [option.key, option])),
-	])
+	]),
 );
 
 function getAssetPath(category, key) {
@@ -358,7 +363,7 @@ function getAssetPath(category, key) {
 	if (!assetName) return null;
 
 	return `assets/${encodeURIComponent(category)}/${encodeURIComponent(
-		assetName
+		assetName,
 	)}.webp`;
 }
 
@@ -369,6 +374,46 @@ function loadImage(src) {
 		img.onerror = () => reject(new Error(`Unable to load ${src}`));
 		img.src = src;
 	});
+}
+
+function ensureNumberFontLoaded() {
+	if (!document.fonts) return Promise.resolve();
+	if (!numberFontReadyPromise) {
+		numberFontReadyPromise = document.fonts.load(
+			`${numberFontSize}px ${numberFontFamily}`,
+		);
+	}
+	return numberFontReadyPromise;
+}
+
+function drawBonklerNumber(ctx) {
+	if (!bonklerNumber) return;
+
+	ctx.save();
+	ctx.font = `${numberFontSize}px ${numberFontFamily}, monospace`;
+	ctx.textBaseline = "top";
+	const textX = 16;
+	const textY = 16;
+	const maxWidth = 128;
+	const outlineOffsets = [
+		[-3, 0],
+		[3, 0],
+		[0, -3],
+		[0, 3],
+		[-3, -3],
+		[3, -3],
+		[-3, 3],
+		[3, 3],
+	];
+
+	ctx.fillStyle = "#111";
+	for (const [offsetX, offsetY] of outlineOffsets) {
+		ctx.fillText(bonklerNumber, textX + offsetX, textY + offsetY, maxWidth);
+	}
+
+	ctx.fillStyle = "#fff";
+	ctx.fillText(bonklerNumber, textX, textY, maxWidth);
+	ctx.restore();
 }
 
 async function renderBonklerImage() {
@@ -383,6 +428,7 @@ async function renderBonklerImage() {
 	canvas.height = layerHeight * renderScale;
 	ctx.imageSmoothingEnabled = false;
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	await ensureNumberFontLoaded();
 
 	for (const layer of layers) {
 		try {
@@ -393,6 +439,8 @@ async function renderBonklerImage() {
 			console.warn(error);
 		}
 	}
+
+	drawBonklerNumber(ctx);
 
 	return canvas.toDataURL("image/png");
 }
@@ -405,13 +453,13 @@ const bonklerHistory = [];
 function getURLParams() {
 	const searchParams = new URLSearchParams(window.location.search);
 	const params = {};
-	for (let param of searchParams) {
+	for (const param of searchParams) {
 		params[param[0]] = param[1];
 	}
 	return params;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 	const params = getURLParams();
 	const saveButton = document.getElementById("SaveBonkler");
 	const randomButton = document.getElementById("RandomBonkler");
@@ -424,7 +472,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// Button stuff
 	saveButton.addEventListener("click", () =>
-		handleSave(bonklerImage, bonklerName)
+		handleSave(bonklerImage, bonklerName),
 	);
 	randomButton.addEventListener("click", () => {
 		handleRandom();
@@ -434,8 +482,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	// Input stuff
-	bonklerMoneyInput.addEventListener("change", (event) =>
-		handleMoneyChange(event.target.value)
+	bonklerMoneyInput.addEventListener("input", (event) =>
+		handleMoneyChange(event.target.value),
 	);
 	bonklerNameInput.addEventListener("change", (event) => {
 		handleNameChange(event.target.value);
@@ -481,6 +529,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
 
 	bonklerName = bonklerNameInput.value || "";
+	bonklerNumber = bonklerMoneyInput.value || "";
 });
 
 function populateSelectors(data) {
@@ -496,7 +545,7 @@ function populateSelectors(data) {
 		});
 
 		selectElement.addEventListener("change", (event) =>
-			handleSelection(category, event.target.value, true)
+			handleSelection(category, event.target.value, true),
 		);
 	});
 }
@@ -525,8 +574,8 @@ async function buildBonkler(saveState) {
 		newUrl += `&money=${money}`;
 	}
 
-	if (bonklerName && bonklerName != "") {
-		newUrl += `&name=${bonklerName}`;
+	if (bonklerName && bonklerName !== "") {
+		newUrl += `&name=${encodeURIComponent(bonklerName)}`;
 	}
 
 	// Also update Bonkler history
@@ -534,11 +583,12 @@ async function buildBonkler(saveState) {
 		bonklerHistory.push(template);
 	}
 
-	// Use pushState to update the URL
-	window.history.pushState({ path: newUrl }, "", newUrl);
+	// Replace the current entry so trait changes do not flood browser history.
+	window.history.replaceState({ path: newUrl }, "", newUrl);
 }
 
 function handleMoneyChange(value, saveState) {
+	bonklerNumber = value || "";
 	const val = value * gwei;
 	money = Math.ceil((0.7 * val) / 1e15) * 1e15;
 	buildBonkler(saveState);
@@ -547,7 +597,8 @@ function handleMoneyChange(value, saveState) {
 function handleParamMoney(value) {
 	let val = value / 1e15 / 0.7;
 	val = val / (gwei / 1e15);
-	document.getElementById("BonklerMoney").value = val;
+	bonklerNumber = String(val);
+	document.getElementById("BonklerMoney").value = bonklerNumber;
 }
 
 function handleNameChange(value) {
@@ -561,7 +612,7 @@ function handleSave(bonklerImage, bonklerName) {
 	const img = new Image();
 
 	img.crossOrigin = "Anonymous";
-	img.onload = function () {
+	img.onload = () => {
 		canvas.width = img.width;
 		canvas.height = img.height;
 		ctx.drawImage(img, 0, 0);
@@ -571,7 +622,7 @@ function handleSave(bonklerImage, bonklerName) {
 		element.setAttribute("href", dataURL);
 		element.setAttribute(
 			"download",
-			`${bonklerName != "" ? bonklerName : "Bonkler"}.png`
+			`${bonklerName !== "" ? bonklerName : "Bonkler"}.png`,
 		);
 		document.body.appendChild(element);
 		element.click();
@@ -582,17 +633,17 @@ function handleSave(bonklerImage, bonklerName) {
 
 function handleRandom() {
 	const cats = Object.keys(data);
-	for (item of cats) {
-		let randomItem =
-			data[item][Math.floor(Math.random() * data[item].length)].key;
-		templateState[item] = randomItem;
-		document.getElementById(item).value = randomItem;
+	for (const category of cats) {
+		const randomItem =
+			data[category][Math.floor(Math.random() * data[category].length)].key;
+		templateState[category] = randomItem;
+		document.getElementById(category).value = randomItem;
 	}
 	buildBonkler();
 }
 
 function shareImage(blob) {
-	const name = bonklerName != "" ? bonklerName : "Bonkler";
+	const name = bonklerName !== "" ? bonklerName : "Bonkler";
 	if (navigator.share) {
 		const file = new File([blob], name + ".png", { type: "image/png" });
 		navigator
@@ -614,7 +665,7 @@ function blobbifyBonkler(image, callback) {
 	const ctx = canvas.getContext("2d");
 	const img = new Image();
 
-	img.onload = function () {
+	img.onload = () => {
 		canvas.width = img.width;
 		canvas.height = img.height;
 		ctx.drawImage(img, 0, 0);
